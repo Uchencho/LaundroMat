@@ -8,8 +8,9 @@ namespace LaundroMat.Profiles
         
             CreateMap<Models.UserForCreationDTO, Entities.User>()
                 .ForMember(dest => dest.RegistrationDate, opt => 
-                opt.MapFrom(src => src.RegistrationDate.Date.ToString()));
-        
+                opt.MapFrom(src => DateTime.Now.ToLongDateString()));
+
+            CreateMap<Entities.User, Models.UserDto>();
        }
     }
 }

@@ -13,9 +13,19 @@ builder.Services.AddDbContext<LaundroMatContext>(
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.UseExceptionHandler(appBuilder =>
+{
+    appBuilder.Run(async ctx =>
+    {
+        ctx.Response.StatusCode = 500;
+        await ctx.Response.WriteAsync("An unexpected error occured, please try again later");
+    });
+});
 
-app.UseHttpsRedirection();
+app.MapControllers();
+
+app.Run();

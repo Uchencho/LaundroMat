@@ -5,13 +5,13 @@ namespace LaundroMat.Entities
     public class User
     {
 
-        public User(string firstName, string lastName, string email, string phoneNumber, string regDate)
+        public User(string firstName, string lastName, string email, string phoneNumber, string registrationDate)
         {
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             PhoneNumber = phoneNumber;
-            RegistrationDate = regDate;
+            RegistrationDate = registrationDate;
         }
 
         [Key]
