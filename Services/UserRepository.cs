@@ -34,5 +34,16 @@ namespace LaundroMat.Services
         {
            return await _context.SaveChangesAsync() >= 0;
         }
+
+        public async Task<User> GetUserAsync(Guid id)
+        {
+            if (id == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            return user ?? throw new Exception("user with id does not exist");
+        }
     }
 }

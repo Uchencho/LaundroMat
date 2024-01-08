@@ -4,14 +4,13 @@ namespace LaundroMat.Entities
 {
     public class User
     {
-
-        public User(string firstName, string lastName, string email, string phoneNumber, string registrationDate)
+        public User(string firstName, string lastName, string email, string phoneNumber)
         {
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             PhoneNumber = phoneNumber;
-            RegistrationDate = registrationDate;
+            RegistrationDate = DateTime.UtcNow.ToString();
         }
 
         [Key]
@@ -34,7 +33,6 @@ namespace LaundroMat.Entities
         public string PhoneNumber { get; set; }
 
         [Required]
-        public string RegistrationDate { get; set; }
+        public string RegistrationDate { get; set; } = DateTime.UtcNow.ToString();
     }
-   
 }

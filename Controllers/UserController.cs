@@ -22,13 +22,25 @@ namespace LaundroMat.Controllers
         [HttpPost]
         public async Task<ActionResult<UserDto>> CreateUser(UserForCreationDTO userInput)
         {
-            Console.WriteLine($"input is {userInput.FirstName}, {userInput.LastName}, {userInput.RegistrationDate}");
+            userInput.RegistrationDate = DateTime.UtcNow;
             Entities.User user = _mapper.Map<Entities.User>(userInput);
             _userRepository.AddUser(user);
 
             await _userRepository.SaveAsync();
 
 
+            var userToReturn = _mapper.Map<UserDto>(user);
+            return Ok(userToReturn);
+        }
+
+        [HttpGet("{id}", Name ="GetUser")]
+        public async Task<ActionResult<UserDto>> GetUser(Guid id)
+        {
+            if (id == Guid.Empty)
+            {
+                return BadRequest("id is required");
+            }
+            var user = await _userRepository.GetUserAsync(id);
             var userToReturn = _mapper.Map<UserDto>(user);
             return Ok(userToReturn);
         }

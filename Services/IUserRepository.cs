@@ -6,6 +6,7 @@ namespace LaundroMat.Services
     {
         void AddUser(User user);
         Task<bool> UserExistsAsync(string email);
+        Task<User> GetUserAsync(Guid id);
         Task<bool> SaveAsync();
     }
 }
